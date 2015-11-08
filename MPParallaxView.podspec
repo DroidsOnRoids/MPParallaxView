@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = "MPParallaxView"
-    s.version          = "0.1.0"
+    s.version          = "0.1.1"
     s.summary          = "Apple TV Parallax effect in Swift."
     s.description      = <<-DESC
     Show UIView with parallax effect from new Apple TV.
@@ -20,9 +20,9 @@ Pod::Spec.new do |s|
     s.social_media_url = 'https://twitter.com/mike_p3'
     s.platform     = :ios, '9.0'
     s.requires_arc = true
-    s.source_files = 'Pod/Classes/**/*'
+    s.source_files = 'Pod/Classes/MPParallaxView.swift'
     s.resource_bundles = {
-    'MPParallaxView' => ['Pod/Assets/*.png']
+    'MPParallaxView' => ['Pod/Assets/gloweffect.png']
     }
     s.frameworks = 'UIKit'
 end
