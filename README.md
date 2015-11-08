@@ -11,7 +11,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 ## Parallax effect
 
 There are 3 different ways to set up parallax:
-* **.BasedOnHierarchyInParallaxView** - views in background moves less than views in foreground. You can increase the movement by changing multiplerOfIndexInHierarchyToParallaxOffset - this value will be multiplied by index of view in hierarchy.
+* **.BasedOnHierarchyInParallaxView** - views in background moves less than views in foreground. You can increase the movement by changing multiplerOfIndexInHierarchyToParallaxOffset - this value will be multiplied by index of view in hierarchy. Default.
 * **.BasedOnTag** - set a tag for a view. For instance, snowflakes image view has 13 tag which means noticeable movement. On the other hand, top view with cast members has 1 tag - almost no movement.
 * **.Custom(Int)** - provide your custom value.
 
@@ -30,7 +30,7 @@ pod "MPParallaxView"
 
 ## Author
 
-Michal Pyrka
+Michal Pyrka  
 Twitter: mikep_3
 
 ## License
