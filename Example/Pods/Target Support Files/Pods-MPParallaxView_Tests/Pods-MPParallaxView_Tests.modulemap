@@ -1,0 +1,6 @@
+framework module Pods_MPParallaxView_Tests {
+  umbrella header "Pods-MPParallaxView_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
