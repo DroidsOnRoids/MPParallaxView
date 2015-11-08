@@ -31,7 +31,7 @@ pod "MPParallaxView"
 ## Author
 
 Michal Pyrka  
-Twitter: mikep_3
+Twitter: [mikep_3](https://twitter.com/mike_p3)
 
 ## License
 
