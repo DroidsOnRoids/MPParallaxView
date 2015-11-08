@@ -33,6 +33,11 @@ pod "MPParallaxView"
 Michal Pyrka  
 Twitter: [mikep_3](https://twitter.com/mike_p3)
 
+## Other
+[Inspired by Designmodo](http://designmodo.com/apple-tv-effect)  
+Thanks [Konstantine Trundayev
+](https://dribbble.com/k0t) for Interstellar assets!
+
 ## License
 
 The MIT License (MIT)
