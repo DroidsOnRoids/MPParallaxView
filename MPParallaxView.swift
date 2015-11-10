@@ -7,25 +7,25 @@
 
 import UIKit
 
-enum ViewState {
+public enum ViewState {
     case Initial, Pick, PutDown
 }
 
-enum ParallaxType {
+public enum ParallaxType {
     case BasedOnHierarchyInParallaxView
     case BasedOnTag
     case Custom(Int)
 }
 
-let initialParallaxOffset: CGFloat = 5.0
-let zoomMultipler: CGFloat = 0.02
-let parallaxOffsetDuringPick: CGFloat = 15.0
-let multiplerOfIndexInHierarchyToParallaxOffset: CGFloat = 7.0
-let initialShadowRadius: CGFloat = 10.0
+public let initialParallaxOffset: CGFloat = 5.0
+public let zoomMultipler: CGFloat = 0.02
+public let parallaxOffsetDuringPick: CGFloat = 15.0
+public let multiplerOfIndexInHierarchyToParallaxOffset: CGFloat = 7.0
+public let initialShadowRadius: CGFloat = 10.0
 
-class MPParallaxView: UIView {
+public class MPParallaxView: UIView {
     
-    var state: ViewState = .Initial {
+    public var state: ViewState = .Initial {
         didSet {
             if state != oldValue {
                 animateForGivenState(state)
@@ -33,7 +33,7 @@ class MPParallaxView: UIView {
         }
     }
     var contentView: UIView = UIView()
-    var cornerRadius: CGFloat {
+    public var cornerRadius: CGFloat {
         get {
             return self.layer.cornerRadius
         }
@@ -42,17 +42,17 @@ class MPParallaxView: UIView {
             contentView.layer.cornerRadius = cornerRadius
         }
     }
-    var parallaxType: ParallaxType = .BasedOnTag
-    var iconStyle: Bool = true
+    public var parallaxType: ParallaxType = .BasedOnTag
+    public var iconStyle: Bool = true
     var glowEffect: UIImageView = UIImageView()
     
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         prepareParallaxLook()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         prepareParallaxLook()
     }
@@ -237,14 +237,14 @@ class MPParallaxView: UIView {
     
     //MARK: On touch actions
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    public override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         state = .Pick
         applyParallaxEffectOnView(basedOnTouch: Array(touches).first)
         applyGlowEffectOnView(basedOnTouch: Array(touches).first)
         super.touchesMoved(touches, withEvent: event)
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         state = .PutDown
         removeParallaxEffectFromView()
         super.touchesEnded(touches, withEvent: event)

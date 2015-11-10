@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		04D2C7651B1083FAE21F90B3DFF7C373 /* Pods-MPParallaxView_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A28665AF82568D0B2BB16EAFF9C27C6A /* Pods-MPParallaxView_Tests-dummy.m */; };
 		10B4A6C06D79A9B539200329502FA7D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */; };
-		3A5BCE9D729FE3340EAD73A40E77A493 /* MPParallaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311E477992194D214764C6E52686ABE /* MPParallaxView.swift */; };
-		532322E41BEF8E8F0090413E /* gloweffect.png in Resources */ = {isa = PBXBuildFile; fileRef = 532322E31BEF8E8F0090413E /* gloweffect.png */; };
+		3A5BCE9D729FE3340EAD73A40E77A493 /* MPParallaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819F25454C963F2951E1AAEE8BBBF20 /* MPParallaxView.swift */; };
+		743BCD72F567C3A7A0BD54B47FF3D22A /* gloweffect.png in Resources */ = {isa = PBXBuildFile; fileRef = 6547F087B26F26909EE8C77860443724 /* gloweffect.png */; };
 		7E4960FFB54D01E0B1C45CF36C60BBF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
-		86B627A7609564507709D85BDB7A59BE /* MPParallaxView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D86E5B2E8DBF7E27C880F0D6CC5DB8 /* MPParallaxView-dummy.m */; };
+		86B627A7609564507709D85BDB7A59BE /* MPParallaxView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C38E43474E4B9872567575D7DAA092F /* MPParallaxView-dummy.m */; };
 		92F736F6FDBE82FCFBC8EF79B544657A /* Pods-MPParallaxView_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B6BCCA091C108E91F50F7C2C045D06 /* Pods-MPParallaxView_Example-dummy.m */; };
 		9D7F43EF7386997A25D6CCB3901EB1B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
 		A0E10EC61918E230C36D0EA866740A69 /* Pods-MPParallaxView_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C792CC6BA1A690536C436EA62AC563AD /* Pods-MPParallaxView_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9AC51C674644288D434F77F63FDC8F7 /* MPParallaxView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 238031C8CBB79B379B9271C1D2B37FE2 /* MPParallaxView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9AC51C674644288D434F77F63FDC8F7 /* MPParallaxView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD327DC0A8C0DF4729283F9573350CD /* MPParallaxView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F7A527C2AC1D24230CA10E1EA06BEBB7 /* Pods-MPParallaxView_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 131143F4CBEF716010AFF4E9AEBD2A96 /* Pods-MPParallaxView_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F9E73EB48099F0FB40590EDCA4EBD7D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
 		FC3FCEE8D1294B556E011381647D28BC /* MPParallaxView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A992790B43C32E9028FD3AF5F412E85D /* MPParallaxView.bundle */; };
@@ -48,24 +48,25 @@
 
 /* Begin PBXFileReference section */
 		073E2D3DE677514BF9F205082602101F /* MPParallaxView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPParallaxView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0819F25454C963F2951E1AAEE8BBBF20 /* MPParallaxView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MPParallaxView.swift; sourceTree = "<group>"; };
+		0825B2FFE0835BDBCE3E560C0793AA25 /* MPParallaxView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MPParallaxView-prefix.pch"; sourceTree = "<group>"; };
+		0C38E43474E4B9872567575D7DAA092F /* MPParallaxView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MPParallaxView-dummy.m"; sourceTree = "<group>"; };
 		1176DFBD7E3FF86E456A2666E1F711E4 /* Pods-MPParallaxView_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MPParallaxView_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		131143F4CBEF716010AFF4E9AEBD2A96 /* Pods-MPParallaxView_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MPParallaxView_Example-umbrella.h"; sourceTree = "<group>"; };
-		1311E477992194D214764C6E52686ABE /* MPParallaxView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MPParallaxView.swift; sourceTree = "<group>"; };
 		1B6069BC0697AD501196AB5CDB7330F6 /* Pods-MPParallaxView_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-MPParallaxView_Example.modulemap"; sourceTree = "<group>"; };
-		238031C8CBB79B379B9271C1D2B37FE2 /* MPParallaxView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MPParallaxView-umbrella.h"; sourceTree = "<group>"; };
 		2416D4275E279AE3E66B2877EE5B079B /* Pods-MPParallaxView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MPParallaxView_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		29D98B9D8A742408CAB2064CE48CF1D0 /* MPParallaxView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MPParallaxView.xcconfig; sourceTree = "<group>"; };
-		33D86E5B2E8DBF7E27C880F0D6CC5DB8 /* MPParallaxView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MPParallaxView-dummy.m"; sourceTree = "<group>"; };
-		3A455D322B18A829E8DE84E88FDFE089 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		432F965D3A6CACA7DE4454F186C5A8CE /* MPParallaxView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MPParallaxView-prefix.pch"; sourceTree = "<group>"; };
+		428348B1281F4DAF5FE85BDBC4E2F6A2 /* MPParallaxView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MPParallaxView.modulemap; sourceTree = "<group>"; };
 		47300A6AD4322F2C6B711831E5D3526E /* Pods-MPParallaxView_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MPParallaxView_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		4CD327DC0A8C0DF4729283F9573350CD /* MPParallaxView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MPParallaxView-umbrella.h"; sourceTree = "<group>"; };
 		4E1BD2D89BA38BCC903E96265CABF49C /* Pods_MPParallaxView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MPParallaxView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		532322E31BEF8E8F0090413E /* gloweffect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gloweffect.png; sourceTree = "<group>"; };
+		6547F087B26F26909EE8C77860443724 /* gloweffect.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = gloweffect.png; sourceTree = "<group>"; };
 		6AC3E3C8FFE05EA0ECE5FA7E2416FF88 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		71E303996CE0303B3028AC29F9A65506 /* Pods-MPParallaxView_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MPParallaxView_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		74379C138AEDF65B4418F14A5E65190B /* Pods-MPParallaxView_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-MPParallaxView_Tests.modulemap"; sourceTree = "<group>"; };
+		798A0C1C1FF30F5D193672D75D55C9BC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80C1D06AE3BA4FE7D475C4CCB86026E0 /* Pods-MPParallaxView_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MPParallaxView_Tests-resources.sh"; sourceTree = "<group>"; };
+		82E64049647E0691C0DD957F8D460B83 /* MPParallaxView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MPParallaxView.xcconfig; sourceTree = "<group>"; };
 		87B6BCCA091C108E91F50F7C2C045D06 /* Pods-MPParallaxView_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MPParallaxView_Example-dummy.m"; sourceTree = "<group>"; };
 		9851F66D04936C11B6619CA087F3521C /* Pods-MPParallaxView_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MPParallaxView_Example-frameworks.sh"; sourceTree = "<group>"; };
 		9B3DBA089F5E89D04DDAB946CCEB19DB /* Pods-MPParallaxView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MPParallaxView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -81,7 +82,6 @@
 		CC050B8D3E3C55BEFA2F01FCDC0AEDF1 /* Pods-MPParallaxView_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MPParallaxView_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D8354A49E5C3471679A820E7D9AC0042 /* Pods-MPParallaxView_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MPParallaxView_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E76C9ECCF892FF6BC96AB1367BDEBFE5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EC5E2793A5655F0F21214D4E6BF35BCB /* MPParallaxView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MPParallaxView.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +120,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08C5335912389937CB2D01C5B791C28F /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				6547F087B26F26909EE8C77860443724 /* gloweffect.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		18340F12838DEE43507667CC74401EB1 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,37 +137,12 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		1A97791D54A68A6453F9BE57137D1AD5 /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D4FC5CB6716B8EBDE8EBD5477DC20190 /* MPParallaxView */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		339E7CC4D95F955F081E286487CF7D5D /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				532322E21BEF8E7C0090413E /* Assets */,
-				8958B5030C2944A25BA3F6CA1117677B /* Classes */,
-			);
-			path = Pod;
-			sourceTree = "<group>";
-		};
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				18340F12838DEE43507667CC74401EB1 /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		532322E21BEF8E7C0090413E /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				532322E31BEF8E8F0090413E /* gloweffect.png */,
-			);
-			name = Assets;
 			sourceTree = "<group>";
 		};
 		65F4E858369A063B80CE0860956C0514 /* Pods-MPParallaxView_Example */ = {
@@ -189,23 +172,31 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		7A95A571F0BEFE4AFB384802B2C3BF3C /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DB37280FD391475E0D8C4C1B15FF29DE /* MPParallaxView */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		7B069FE86338C0A1454615336965E175 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				08C5335912389937CB2D01C5B791C28F /* Assets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
-				1A97791D54A68A6453F9BE57137D1AD5 /* Development Pods */,
+				7A95A571F0BEFE4AFB384802B2C3BF3C /* Development Pods */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
 				EA29C6B9DCE1986C7C748C8AC334767C /* Products */,
 				76E2C3FF336BAB7C39B7EECFF31808EC /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		8958B5030C2944A25BA3F6CA1117677B /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				1311E477992194D214764C6E52686ABE /* MPParallaxView.swift */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 		D3A6F6CEDA5C31CFFBE5ED496434C47E /* Pods-MPParallaxView_Tests */ = {
@@ -226,11 +217,12 @@
 			path = "Target Support Files/Pods-MPParallaxView_Tests";
 			sourceTree = "<group>";
 		};
-		D4FC5CB6716B8EBDE8EBD5477DC20190 /* MPParallaxView */ = {
+		DB37280FD391475E0D8C4C1B15FF29DE /* MPParallaxView */ = {
 			isa = PBXGroup;
 			children = (
-				339E7CC4D95F955F081E286487CF7D5D /* Pod */,
-				F0548F864F25B74B654F5EC4F79A7ED8 /* Support Files */,
+				0819F25454C963F2951E1AAEE8BBBF20 /* MPParallaxView.swift */,
+				7B069FE86338C0A1454615336965E175 /* Resources */,
+				EE52913B6B655A95381A521F5A9914F9 /* Support Files */,
 			);
 			name = MPParallaxView;
 			path = ../..;
@@ -247,15 +239,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F0548F864F25B74B654F5EC4F79A7ED8 /* Support Files */ = {
+		EE52913B6B655A95381A521F5A9914F9 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				3A455D322B18A829E8DE84E88FDFE089 /* Info.plist */,
-				EC5E2793A5655F0F21214D4E6BF35BCB /* MPParallaxView.modulemap */,
-				29D98B9D8A742408CAB2064CE48CF1D0 /* MPParallaxView.xcconfig */,
-				33D86E5B2E8DBF7E27C880F0D6CC5DB8 /* MPParallaxView-dummy.m */,
-				432F965D3A6CACA7DE4454F186C5A8CE /* MPParallaxView-prefix.pch */,
-				238031C8CBB79B379B9271C1D2B37FE2 /* MPParallaxView-umbrella.h */,
+				798A0C1C1FF30F5D193672D75D55C9BC /* Info.plist */,
+				428348B1281F4DAF5FE85BDBC4E2F6A2 /* MPParallaxView.modulemap */,
+				82E64049647E0691C0DD957F8D460B83 /* MPParallaxView.xcconfig */,
+				0C38E43474E4B9872567575D7DAA092F /* MPParallaxView-dummy.m */,
+				0825B2FFE0835BDBCE3E560C0793AA25 /* MPParallaxView-prefix.pch */,
+				4CD327DC0A8C0DF4729283F9573350CD /* MPParallaxView-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/MPParallaxView";
@@ -334,7 +326,7 @@
 			buildPhases = (
 				999897CBCFD52970D488555058F433A4 /* Sources */,
 				77B70562B96AB1BD4905BF2F43C97A98 /* Frameworks */,
-				CAB6600DAAC01032464644E4716A4811 /* Resources */,
+				B8CEB3DA7C5A022FA197537F5937703A /* Resources */,
 			);
 			buildRules = (
 			);
@@ -398,14 +390,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC3FCEE8D1294B556E011381647D28BC /* MPParallaxView.bundle in Resources */,
-				532322E41BEF8E8F0090413E /* gloweffect.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CAB6600DAAC01032464644E4716A4811 /* Resources */ = {
+		B8CEB3DA7C5A022FA197537F5937703A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				743BCD72F567C3A7A0BD54B47FF3D22A /* gloweffect.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,7 +492,7 @@
 		};
 		2E62AD19664F50326BE793C9152BF373 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29D98B9D8A742408CAB2064CE48CF1D0 /* MPParallaxView.xcconfig */;
+			baseConfigurationReference = 82E64049647E0691C0DD957F8D460B83 /* MPParallaxView.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				PRODUCT_NAME = MPParallaxView;
@@ -582,7 +574,7 @@
 		};
 		641A66FDCE790F693520C9C3DB091508 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29D98B9D8A742408CAB2064CE48CF1D0 /* MPParallaxView.xcconfig */;
+			baseConfigurationReference = 82E64049647E0691C0DD957F8D460B83 /* MPParallaxView.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -705,7 +697,7 @@
 		};
 		D5BB920B7C49CAC15CB9C715B7B6277B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29D98B9D8A742408CAB2064CE48CF1D0 /* MPParallaxView.xcconfig */;
+			baseConfigurationReference = 82E64049647E0691C0DD957F8D460B83 /* MPParallaxView.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -732,7 +724,7 @@
 		};
 		EA11178726B6E0A27DB3899ED4CDDEEA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29D98B9D8A742408CAB2064CE48CF1D0 /* MPParallaxView.xcconfig */;
+			baseConfigurationReference = 82E64049647E0691C0DD957F8D460B83 /* MPParallaxView.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				PRODUCT_NAME = MPParallaxView;
