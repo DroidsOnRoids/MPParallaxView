@@ -32,7 +32,7 @@ public class MPParallaxView: UIView {
             }
         }
     }
-    var contentView: UIView = UIView()
+    public var contentView: UIView = UIView()
     public var cornerRadius: CGFloat {
         get {
             return self.layer.cornerRadius
@@ -59,7 +59,7 @@ public class MPParallaxView: UIView {
     
     //MARK: Setup layout
     
-    func prepareParallaxLook() {
+    public func prepareParallaxLook() {
         setupLayout()
         addShadowPath()
         setupContentView()
@@ -76,6 +76,7 @@ public class MPParallaxView: UIView {
     func setupContentView() {
         contentView.frame = bounds
         contentView.layer.masksToBounds = true
+        contentView.backgroundColor = .whiteColor()
         subviews.forEach { subview in
             subview.translatesAutoresizingMaskIntoConstraints = true
             subview.removeFromSuperview()

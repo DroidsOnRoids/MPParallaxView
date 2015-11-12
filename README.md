@@ -2,7 +2,7 @@
 
 Apple TV Parallax effect in Swift.
 
-<img src="http://i.imgur.com/evBWf3c.gif" alt="MPParallaxView example">
+<img src="http://i.imgur.com/HpujAKj.gif" alt="MPParallaxView example">
 
 ## Usage
 

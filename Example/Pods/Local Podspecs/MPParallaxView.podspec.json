@@ -1,6 +1,6 @@
 {
   "name": "MPParallaxView",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "summary": "Apple TV Parallax effect in Swift.",
   "description": "Show UIView with parallax effect from new Apple TV.",
   "homepage": "https://github.com/DroidsOnRoids/MPParallaxView",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/DroidsOnRoids/MPParallaxView.git",
-    "tag": "0.1.2"
+    "tag": "0.1.3"
   },
   "social_media_url": "https://twitter.com/mike_p3",
   "platforms": {

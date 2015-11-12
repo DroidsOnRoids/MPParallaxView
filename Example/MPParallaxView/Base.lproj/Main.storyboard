@@ -47,12 +47,26 @@
                                     <constraint firstAttribute="height" constant="469" id="x3e-ag-a1r"/>
                                 </constraints>
                             </view>
+                            <segmentedControl opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZHD-Mq-8gQ">
+                                <rect key="frame" x="221" y="564" width="159" height="29"/>
+                                <animations/>
+                                <segments>
+                                    <segment title="Interstellar"/>
+                                    <segment title="Spectre"/>
+                                </segments>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="segmentedControlChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="YEf-c7-mfg"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.77647058823529413" green="0.84313725490196079" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="ZHD-Mq-8gQ" secondAttribute="bottom" constant="8" id="Ey5-Ik-oRM"/>
                             <constraint firstItem="C04-ud-3XR" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="SP4-Ch-dnA"/>
                             <constraint firstItem="C04-ud-3XR" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="clf-bm-U6W"/>
+                            <constraint firstItem="ZHD-Mq-8gQ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="lfC-C5-Jlw"/>
                         </constraints>
                     </view>
                 </viewController>

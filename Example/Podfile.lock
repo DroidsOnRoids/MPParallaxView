@@ -1,5 +1,5 @@
 PODS:
-  - MPParallaxView (0.1.2)
+  - MPParallaxView (0.1.3)
 
 DEPENDENCIES:
   - MPParallaxView (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  MPParallaxView: 8519d200202e6b443837876ff7848897f640e56b
+  MPParallaxView: 49e04bf51d3c4246aa29c2a94fca60dca64f7245
 
 COCOAPODS: 0.39.0
