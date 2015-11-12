@@ -23,6 +23,7 @@ public class MPParallaxView: UIView {
     @IBInspectable public var parallaxOffsetDuringPick: CGFloat = 15.0
     @IBInspectable public var multiplerOfIndexInHierarchyToParallaxOffset: CGFloat = 7.0
     @IBInspectable public var initialShadowRadius: CGFloat = 10.0
+    @IBInspectable public var finalShadowRadius: CGFloat = 20.0
     
     private(set) public var state: ViewState = .Initial {
         didSet {
@@ -138,38 +139,47 @@ public class MPParallaxView: UIView {
             break
         }
     }
+
+    private func addShadowGroupAnimation(shadowOffset shadowOffset: CGSize, shadowRadius: CGFloat, duration: NSTimeInterval, layer: CALayer) {
+        if let presentationLayer = layer.presentationLayer() as? CALayer {
+
+            let offsetAnimation = CABasicAnimation(keyPath: "shadowOffset")
+            offsetAnimation.fromValue = NSValue(CGSize: presentationLayer.shadowOffset)
+            offsetAnimation.toValue = NSValue(CGSize: shadowOffset)
+
+            let radiusAnimation = CABasicAnimation(keyPath: "shadowRadius")
+            radiusAnimation.fromValue = presentationLayer.shadowRadius as NSNumber
+            radiusAnimation.toValue = shadowRadius
+
+            let animationGroup = CAAnimationGroup()
+
+            animationGroup.duration = duration
+            animationGroup.animations = [offsetAnimation, radiusAnimation]
+
+            layer.addAnimation(animationGroup, forKey: "shadowAnim")
+        }
+        layer.shadowRadius = shadowRadius
+        layer.shadowOffset = shadowOffset
+    }
     
+    private func pickAnimation() {
+        let shadowOffset = CGSize(width: 0.0, height: 30.0);
+        addShadowGroupAnimation(shadowOffset: shadowOffset, shadowRadius: finalShadowRadius, duration: 0.02, layer: layer)
+    }
+    
+    private func putDownAnimation() {
+        let shadowOffset = CGSizeZero
+        addShadowGroupAnimation(shadowOffset: shadowOffset, shadowRadius: initialShadowRadius, duration: 0.4, layer: layer)
+    }
+
     private func animatePick() {
-        layer.addAnimation(pickAnimation(), forKey: nil)
+        pickAnimation()
     }
-    
-    private func groupAnimation(shadowOffset shadowOffset: CGSize, shadowRadius: CGFloat, duration: NSTimeInterval) -> CAAnimationGroup {
-        let offsetAnimation = CABasicAnimation(keyPath: "shadowOffset")
-        offsetAnimation.toValue = NSValue(CGSize: shadowOffset)
-        
-        let radiusAnimation = CABasicAnimation(keyPath: "shadowRadius")
-        radiusAnimation.toValue = shadowRadius
-        
-        let animationGroup = CAAnimationGroup()
-        animationGroup.fillMode = kCAFillModeForwards
-        animationGroup.removedOnCompletion = false
-        animationGroup.duration = duration
-        animationGroup.animations = [offsetAnimation, radiusAnimation]
-        return animationGroup
-    }
-    
-    private func pickAnimation() -> CAAnimationGroup {
-        return groupAnimation(shadowOffset: CGSize(width: 0.0, height: 30.0), shadowRadius: 20.0, duration: 0.02)
-    }
-    
-    private func putDownAnimation() -> CAAnimationGroup {
-        return groupAnimation(shadowOffset: CGSize(width: 0.0, height: 0.0), shadowRadius: initialShadowRadius, duration: 0.4)
-    }
-    
+
     private func animateReturn() {
-        self.layer.addAnimation(putDownAnimation(), forKey: nil)
+        putDownAnimation()
     }
-    
+
     private func parallaxOffset(forView view: UIView) -> CGFloat {
         switch parallaxType {
         case .BasedOnHierarchyInParallaxView(let parallaxOffsetMultiplier):
