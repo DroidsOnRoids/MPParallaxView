@@ -12,28 +12,27 @@ public enum ViewState {
 }
 
 public enum ParallaxType {
-    case BasedOnHierarchyInParallaxView
+    case BasedOnHierarchyInParallaxView(parallaxOffsetMultiplier: CGFloat?)
     case BasedOnTag
-    case Custom(Int)
+    case Custom(parallaxOffset: CGFloat)
 }
 
-public let initialParallaxOffset: CGFloat = 5.0
-public let zoomMultipler: CGFloat = 0.02
-public let parallaxOffsetDuringPick: CGFloat = 15.0
-public let multiplerOfIndexInHierarchyToParallaxOffset: CGFloat = 7.0
-public let initialShadowRadius: CGFloat = 10.0
-
 public class MPParallaxView: UIView {
+    @IBInspectable public var initialParallaxOffset: CGFloat = 5.0
+    @IBInspectable public var zoomMultipler: CGFloat = 0.02
+    @IBInspectable public var parallaxOffsetDuringPick: CGFloat = 15.0
+    @IBInspectable public var multiplerOfIndexInHierarchyToParallaxOffset: CGFloat = 7.0
+    @IBInspectable public var initialShadowRadius: CGFloat = 10.0
     
-    public var state: ViewState = .Initial {
+    private(set) public var state: ViewState = .Initial {
         didSet {
             if state != oldValue {
                 animateForGivenState(state)
             }
         }
     }
-    public var contentView: UIView = UIView()
-    public var cornerRadius: CGFloat {
+    private(set) public var contentView: UIView = UIView()
+    @IBInspectable public var cornerRadius: CGFloat {
         get {
             return self.layer.cornerRadius
         }
@@ -43,7 +42,7 @@ public class MPParallaxView: UIView {
         }
     }
     public var parallaxType: ParallaxType = .BasedOnTag
-    public var iconStyle: Bool = true
+    @IBInspectable public var iconStyle: Bool = true
     var glowEffect: UIImageView = UIImageView()
     
     
@@ -65,7 +64,7 @@ public class MPParallaxView: UIView {
         setupContentView()
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         layer.shadowRadius = initialShadowRadius
         layer.shadowOpacity = 0.6
         layer.shadowColor = UIColor.blackColor().CGColor
@@ -73,7 +72,7 @@ public class MPParallaxView: UIView {
         backgroundColor = .clearColor()
     }
     
-    func setupContentView() {
+    private func setupContentView() {
         contentView.frame = bounds
         contentView.layer.masksToBounds = true
         contentView.backgroundColor = .whiteColor()
@@ -91,7 +90,7 @@ public class MPParallaxView: UIView {
         addSubview(contentView)
     }
     
-    func resizeSubviewsForParallax() {
+    private func resizeSubviewsForParallax() {
         let offset: CGFloat = initialParallaxOffset
         contentView.subviews.forEach { subview in
             subview.frame.origin = CGPoint(x: -offset, y: -offset)
@@ -99,7 +98,7 @@ public class MPParallaxView: UIView {
         }
     }
     
-    func addShadowPath() {
+    private func addShadowPath() {
         let path = UIBezierPath()
         path.moveToPoint(CGPoint(x: 4, y: CGRectGetHeight(bounds)))
         path.addLineToPoint(CGPoint(x: CGRectGetWidth(bounds) - 4, y: CGRectGetHeight(bounds)))
@@ -111,14 +110,14 @@ public class MPParallaxView: UIView {
     
     //MARK: Animations
     
-    func makeZoomInEffect() {
+    private func makeZoomInEffect() {
         contentView.subviews.forEach { subview in
             subview.center = CGPoint(x: subview.center.x - widthZoom(subview), y: subview.center.y - heightZoom(subview))
             subview.frame.size = CGSize(width: subview.frame.size.width + widthZoom(subview) * 2, height: subview.frame.size.height + heightZoom(subview) * 2)
         }
     }
     
-    func makeZoomOutEffect() {
+    private func makeZoomOutEffect() {
         UIView.animateWithDuration(0.3) {
             self.contentView.subviews.forEach { subview in
                 subview.center = CGPoint(x: subview.center.x + self.widthZoom(subview), y: subview.center.y + self.heightZoom(subview))
@@ -127,7 +126,7 @@ public class MPParallaxView: UIView {
         }
     }
     
-    func animateForGivenState(state: ViewState) {
+    private func animateForGivenState(state: ViewState) {
         switch state {
         case .Pick:
             animatePick()
@@ -140,11 +139,11 @@ public class MPParallaxView: UIView {
         }
     }
     
-    func animatePick() {
+    private func animatePick() {
         layer.addAnimation(pickAnimation(), forKey: nil)
     }
     
-    func groupAnimation(shadowOffset shadowOffset: CGSize, shadowRadius: CGFloat, duration: NSTimeInterval) -> CAAnimationGroup {
+    private func groupAnimation(shadowOffset shadowOffset: CGSize, shadowRadius: CGFloat, duration: NSTimeInterval) -> CAAnimationGroup {
         let offsetAnimation = CABasicAnimation(keyPath: "shadowOffset")
         offsetAnimation.toValue = NSValue(CGSize: shadowOffset)
         
@@ -159,34 +158,34 @@ public class MPParallaxView: UIView {
         return animationGroup
     }
     
-    func pickAnimation() -> CAAnimationGroup {
+    private func pickAnimation() -> CAAnimationGroup {
         return groupAnimation(shadowOffset: CGSize(width: 0.0, height: 30.0), shadowRadius: 20.0, duration: 0.02)
     }
     
-    func putDownAnimation() -> CAAnimationGroup {
+    private func putDownAnimation() -> CAAnimationGroup {
         return groupAnimation(shadowOffset: CGSize(width: 0.0, height: 0.0), shadowRadius: initialShadowRadius, duration: 0.4)
     }
     
-    func animateReturn() {
+    private func animateReturn() {
         self.layer.addAnimation(putDownAnimation(), forKey: nil)
     }
     
-    func parallaxOffset(forView view: UIView) -> CGFloat {
+    private func parallaxOffset(forView view: UIView) -> CGFloat {
         switch parallaxType {
-        case .BasedOnHierarchyInParallaxView:
+        case .BasedOnHierarchyInParallaxView(let parallaxOffsetMultiplier):
             if let indexInSuperview = view.superview?.subviews.indexOf(view) {
-                return CGFloat(indexInSuperview) * multiplerOfIndexInHierarchyToParallaxOffset
+                return CGFloat(indexInSuperview) * (parallaxOffsetMultiplier ?? multiplerOfIndexInHierarchyToParallaxOffset)
             } else {
                 return 5.0
             }
-        case .Custom(let customValue):
-            return CGFloat(customValue)
+        case .Custom(let parallaxOffset):
+            return parallaxOffset
         case .BasedOnTag:
             return CGFloat(view.tag) * 2.0
         }
     }
     
-    func applyParallaxEffectOnSubviews(xOffset xOffset: CGFloat, yOffset: CGFloat) {
+    private func applyParallaxEffectOnSubviews(xOffset xOffset: CGFloat, yOffset: CGFloat) {
         var parallaxOffsetToSet: CGFloat
         for subview in contentView.subviews {
             parallaxOffsetToSet = parallaxOffset(forView: subview)
@@ -196,7 +195,7 @@ public class MPParallaxView: UIView {
         }
     }
     
-    func applyParallaxEffectOnView(basedOnTouch touch: UITouch?) {
+    private func applyParallaxEffectOnView(basedOnTouch touch: UITouch?) {
         if let touch = touch, let superview = superview {
             let offsetX = (0.5 - touch.locationInView(superview).x / superview.bounds.width) * -1
             let offsetY = (0.5 - touch.locationInView(superview).y / superview.bounds.height) * -1
@@ -210,13 +209,13 @@ public class MPParallaxView: UIView {
         }
     }
     
-    func applyGlowAlpha(glowAlpha: CGFloat) {
+    private func applyGlowAlpha(glowAlpha: CGFloat) {
         if glowAlpha < 1.0 && glowAlpha > 0.0 {
             glowEffect.alpha = glowAlpha
         }
     }
     
-    func applyGlowEffectOnView(basedOnTouch touch: UITouch?) {
+    private func applyGlowEffectOnView(basedOnTouch touch: UITouch?) {
         let changeAlphaValue: CGFloat = 0.05
         if let touch = touch where touch.locationInView(self).y > bounds.height / 2 {
             glowEffect.center = touch.locationInView(self)
@@ -226,7 +225,7 @@ public class MPParallaxView: UIView {
         }
     }
     
-    func removeParallaxEffectFromView() {
+    private func removeParallaxEffectFromView() {
         UIView.animateWithDuration(0.5) {
             self.glowEffect.alpha = 0.0
             self.layer.transform = CATransform3DIdentity
