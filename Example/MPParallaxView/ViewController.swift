@@ -9,8 +9,14 @@
 import UIKit
 import MPParallaxView
 
-class ViewController: UIViewController {
+public enum AssetsNames: String {
+    case Interstellar = "noblurintersterllarbackground"
+    case Spectre = "noblurspectrebackground"
+}
 
+class ViewController: UIViewController {
+    
+    private var blurredPosterImageView: UIImageView?
     @IBAction func segmentedControlChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             setupInterstellar()
@@ -21,21 +27,22 @@ class ViewController: UIViewController {
     
     func setupInterstellar() {
         view.backgroundColor = UIColor(red: 198.0/255.0, green: 215.0/255.0, blue: 224.0/255.0, alpha: 1.0)
-        let parallaxView = view.subviews.filter { $0 is MPParallaxView }.first as?MPParallaxView
+            blurredPosterImageView?.image = UIImage.imageFromAssets(.Interstellar)
+        let parallaxView = view.subviews.filter { $0 is MPParallaxView }.first as? MPParallaxView
         if let parallaxView = parallaxView {
-            parallaxView.subviews.forEach { $0.removeFromSuperview() }
-            interstellarAssets().forEach { parallaxView.addSubview($0) }
+            parallaxView.prepareForNewViews()
+            self.interstellarAssets().forEach { parallaxView.addSubview($0) }
             parallaxView.prepareParallaxLook()
         }
     }
     
     func setupSpectre() {
         view.backgroundColor = UIColor(red: 250.0/255.0, green: 250.0/255.0, blue: 250.0/255.0, alpha: 1.0)
-        let parallaxView = view.subviews.filter { $0 is MPParallaxView }.first as?MPParallaxView
+        blurredPosterImageView?.image = UIImage.imageFromAssets(.Spectre)
+        let parallaxView = view.subviews.filter { $0 is MPParallaxView }.first as? MPParallaxView
         if let parallaxView = parallaxView {
-            parallaxView.subviews.forEach { $0.removeFromSuperview() }
-            parallaxView.contentView.subviews.forEach { $0.removeFromSuperview() }
-            let assets: [UIImageView] = spectreAssets()
+            parallaxView.prepareForNewViews()
+            let assets: [UIImageView] = self.spectreAssets()
             assets.forEach { parallaxView.addSubview($0) }
             parallaxView.prepareParallaxLook()
             if let logo = assets.first {
@@ -49,13 +56,32 @@ class ViewController: UIViewController {
         UISegmentedControl.appearance().setTitleTextAttributes(
             [NSForegroundColorAttributeName : UIColor.whiteColor()],
             forState: .Selected)
+        setupBlur()
     }
-
+    
+    private func setupBlur() {
+        let blurImageView = UIImageView(image: UIImage.imageFromAssets(.Interstellar))
+        blurImageView.frame = view.frame
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurImageView.addSubview(blurEffectView)
+        view.insertSubview(blurImageView, atIndex: 0)
+        blurredPosterImageView = blurImageView
+        setupZIndex()
+    }
+    
+    private func setupZIndex() {
+        (view.subviews.filter { $0 is MPParallaxView }.first as? MPParallaxView)?.layer.zPosition = 100
+        (view.subviews.filter { $0 is UISegmentedControl}.first)?.layer.zPosition = 50
+        blurredPosterImageView?.layer.zPosition = 1
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }
 
 extension UIViewController {
@@ -88,3 +114,9 @@ extension UIViewController {
     }
 }
 
+extension UIImage {
+
+    class func imageFromAssets(asset: AssetsNames) -> UIImage? {
+        return UIImage(named: asset.rawValue)
+    }
+}

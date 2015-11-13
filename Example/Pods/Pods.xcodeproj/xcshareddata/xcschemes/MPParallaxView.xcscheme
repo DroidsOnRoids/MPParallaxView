@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '03A19F1351EB95317EF78A03'
+               BlueprintIdentifier = 'F7BA2494B78969318B4CBE29'
                BlueprintName = 'MPParallaxView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'MPParallaxView.framework'>
