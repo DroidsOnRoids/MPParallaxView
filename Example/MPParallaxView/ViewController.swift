@@ -77,11 +77,6 @@ class ViewController: UIViewController {
         blurredPosterImageView?.layer.zPosition = 1
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }
 
 extension UIViewController {
