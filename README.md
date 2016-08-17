@@ -2,7 +2,7 @@
 
 Apple TV Parallax effect in Swift. Rotate view using touch or accelerometer.
 
-<img src="http://i.imgur.com/QpaCZcw.gif" alt="MPParallaxView example">
+![Preview](Resources/demo.gif)
 
 ## Usage
 
