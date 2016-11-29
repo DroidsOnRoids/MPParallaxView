@@ -14,7 +14,6 @@
 		791FFAE8EE211C556B7FA90F2C776F4F /* MPParallaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819F25454C963F2951E1AAEE8BBBF20 /* MPParallaxView.swift */; };
 		7E4960FFB54D01E0B1C45CF36C60BBF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B04CDA4D9A22D73FBFFA2D18D411E5C2 /* Foundation.framework */; };
 		82F74E671D3E8EC2A411F8AFD0887D6E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDBF5464BAF85C191298AF3DA1435FDC /* CoreMotion.framework */; };
-		90AE6185C6B4433ADE7A668914B3C1D4 /* MPParallaxView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A992790B43C32E9028FD3AF5F412E85D /* MPParallaxView.bundle */; };
 		92F736F6FDBE82FCFBC8EF79B544657A /* Pods-MPParallaxView_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B6BCCA091C108E91F50F7C2C045D06 /* Pods-MPParallaxView_Example-dummy.m */; };
 		9D7F43EF7386997A25D6CCB3901EB1B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B04CDA4D9A22D73FBFFA2D18D411E5C2 /* Foundation.framework */; };
 		A0E10EC61918E230C36D0EA866740A69 /* Pods-MPParallaxView_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C792CC6BA1A690536C436EA62AC563AD /* Pods-MPParallaxView_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -390,7 +389,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90AE6185C6B4433ADE7A668914B3C1D4 /* MPParallaxView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
