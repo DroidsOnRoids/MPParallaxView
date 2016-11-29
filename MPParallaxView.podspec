@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "MPParallaxView"
-    s.version          = "0.2.0"
+    s.version          = "0.3.0"
     s.summary          = "Apple TV Parallax effect in Swift."
     s.description      = <<-DESC
     Show UIView with parallax effect from new Apple TV.

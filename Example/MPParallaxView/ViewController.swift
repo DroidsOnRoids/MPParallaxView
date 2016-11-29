@@ -16,8 +16,8 @@ public enum AssetsNames: String {
 
 class ViewController: UIViewController {
     
-    private var blurredPosterImageView: UIImageView?
-    @IBAction func segmentedControlChanged(sender: UISegmentedControl) {
+    fileprivate var blurredPosterImageView: UIImageView?
+    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             setupInterstellar()
         } else {
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
             assets.forEach { parallaxView.addSubview($0) }
             parallaxView.prepareParallaxLook()
             if let logo = assets.first {
-                logo.frame = CGRectOffset(logo.frame, -50, 0)
+                logo.frame = logo.frame.offsetBy(dx: -50, dy: 0)
             }
         }
     }
@@ -54,24 +54,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UISegmentedControl.appearance().setTitleTextAttributes(
-            [NSForegroundColorAttributeName : UIColor.whiteColor()],
-            forState: .Selected)
+            [NSForegroundColorAttributeName : UIColor.white],
+            for: .selected)
         setupBlur()
     }
     
-    private func setupBlur() {
+    fileprivate func setupBlur() {
         let blurImageView = UIImageView(image: UIImage.imageFromAssets(.Interstellar))
         blurImageView.frame = view.frame
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
         blurImageView.addSubview(blurEffectView)
-        view.insertSubview(blurImageView, atIndex: 0)
+        view.insertSubview(blurImageView, at: 0)
         blurredPosterImageView = blurImageView
         setupZIndex()
     }
     
-    private func setupZIndex() {
+    fileprivate func setupZIndex() {
         (view.subviews.filter { $0 is MPParallaxView }.first as? MPParallaxView)?.layer.zPosition = 100
         (view.subviews.filter { $0 is UISegmentedControl}.first)?.layer.zPosition = 50
         blurredPosterImageView?.layer.zPosition = 1
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
 extension UIViewController {
     
     func parallaxViewFrame() -> CGRect {
-        return (view.subviews.filter { $0 is MPParallaxView }.first as? MPParallaxView)?.frame ?? CGRectZero
+        return (view.subviews.filter { $0 is MPParallaxView }.first as? MPParallaxView)?.frame ?? CGRect.zero
     }
     
     func interstellarAssets() -> [UIImageView] {
@@ -109,14 +109,14 @@ extension UIViewController {
                 return imageView
         }
         spectreImageViews.forEach { $0.frame = parallaxViewFrame() }
-        spectreImageViews.first?.frame = CGRectMake(parallaxViewFrame().origin.x, parallaxViewFrame().origin.y, parallaxViewFrame().size.width * 1.9, parallaxViewFrame().size.height)
+        spectreImageViews.first?.frame = CGRect(x: parallaxViewFrame().origin.x, y: parallaxViewFrame().origin.y, width: parallaxViewFrame().size.width * 1.9, height: parallaxViewFrame().size.height)
         return spectreImageViews
     }
 }
 
 extension UIImage {
 
-    class func imageFromAssets(asset: AssetsNames) -> UIImage? {
+    class func imageFromAssets(_ asset: AssetsNames) -> UIImage? {
         return UIImage(named: asset.rawValue)
     }
 }

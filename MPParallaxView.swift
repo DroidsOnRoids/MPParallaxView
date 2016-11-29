@@ -9,13 +9,13 @@ import UIKit
 import CoreMotion
 
 public enum ViewState {
-    case Initial, Pick, PutDown
+    case initial, pick, putDown
 }
 
 public enum ParallaxType {
-    case BasedOnHierarchyInParallaxView(parallaxOffsetMultiplier: CGFloat?)
-    case BasedOnTag
-    case Custom(parallaxOffset: CGFloat)
+    case basedOnHierarchyInParallaxView(parallaxOffsetMultiplier: CGFloat?)
+    case basedOnTag
+    case custom(parallaxOffset: CGFloat)
 }
 
 private struct AccelerometerMovement {
@@ -23,23 +23,23 @@ private struct AccelerometerMovement {
     let y: Double
 }
 
-public class MPParallaxView: UIView {
-    @IBInspectable public var initialParallaxOffset: CGFloat = 5.0
-    @IBInspectable public var zoomMultipler: CGFloat = 0.02
-    @IBInspectable public var parallaxOffsetDuringPick: CGFloat = 15.0
-    @IBInspectable public var multiplerOfIndexInHierarchyToParallaxOffset: CGFloat = 7.0
-    @IBInspectable public var initialShadowRadius: CGFloat = 10.0
-    @IBInspectable public var finalShadowRadius: CGFloat = 20.0
+open class MPParallaxView: UIView {
+    @IBInspectable open var initialParallaxOffset: CGFloat = 5.0
+    @IBInspectable open var zoomMultipler: CGFloat = 0.02
+    @IBInspectable open var parallaxOffsetDuringPick: CGFloat = 15.0
+    @IBInspectable open var multiplerOfIndexInHierarchyToParallaxOffset: CGFloat = 7.0
+    @IBInspectable open var initialShadowRadius: CGFloat = 10.0
+    @IBInspectable open var finalShadowRadius: CGFloat = 20.0
     
-    private(set) public var state: ViewState = .Initial {
+    fileprivate(set) open var state: ViewState = .initial {
         didSet {
             if state != oldValue {
                 animateForGivenState(state)
             }
         }
     }
-    private(set) public var contentView: UIView = UIView()
-    @IBInspectable public var cornerRadius: CGFloat {
+    fileprivate(set) open var contentView: UIView = UIView()
+    @IBInspectable open var cornerRadius: CGFloat {
         get {
             return self.layer.cornerRadius
         }
@@ -48,16 +48,16 @@ public class MPParallaxView: UIView {
             contentView.layer.cornerRadius = cornerRadius
         }
     }
-    public var parallaxType: ParallaxType = .BasedOnTag
-    @IBInspectable public var iconStyle: Bool = true
+    open var parallaxType: ParallaxType = .basedOnTag
+    @IBInspectable open var iconStyle: Bool = true
     var glowEffect: UIImageView = UIImageView()
     
     //MARK: CoreMotion
-    private lazy var motionManager: CMMotionManager = CMMotionManager()
-    private var accelerometerMovement: AccelerometerMovement?
-    @IBInspectable public var accelerometerEnabled: Bool = false {
+    fileprivate lazy var motionManager: CMMotionManager = CMMotionManager()
+    fileprivate var accelerometerMovement: AccelerometerMovement?
+    @IBInspectable open var accelerometerEnabled: Bool = false {
         didSet {
-            if !accelerometerEnabled && motionManager.accelerometerActive {
+            if !accelerometerEnabled && motionManager.isAccelerometerActive {
                 motionManager.stopAccelerometerUpdates()
             }
         }
@@ -75,13 +75,13 @@ public class MPParallaxView: UIView {
     
     //MARK: Setup layout
     
-    public func prepareParallaxLook() {
+    open func prepareParallaxLook() {
         setupLayout()
         addShadowPath()
         setupContentView()
     }
     
-    public func prepareForNewViews() {
+    open func prepareForNewViews() {
         if accelerometerEnabled {
             glowEffect.alpha = 0.0
             layer.transform = CATransform3DIdentity
@@ -93,36 +93,36 @@ public class MPParallaxView: UIView {
         contentView.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         prepareForMotionDetection()
     }
     
-    private func prepareForMotionDetection() {
-        if let currentQueue = NSOperationQueue.currentQueue() where accelerometerEnabled {
+    fileprivate func prepareForMotionDetection() {
+        if let currentQueue = OperationQueue.current, accelerometerEnabled {
             motionManager.accelerometerUpdateInterval = 0.1
-            motionManager.startAccelerometerUpdatesToQueue(currentQueue) { data, error in
+            motionManager.startAccelerometerUpdates(to: currentQueue) { data, error in
                 self.accelerometerMovement = AccelerometerMovement(x: data?.acceleration.x ?? 0.0, y: data?.acceleration.y ?? 0.0)
-                UIView.animateWithDuration(0.1) {
+                UIView.animate(withDuration: 0.1, animations: {
                     self.applyParallaxEffectOnView(basedOnTouch: nil)
                     self.applyGlowEffectOnView(basedOnAccelerometerMovement: self.accelerometerMovement)
-                }
+                }) 
             }
         }
     }
     
-    private func setupLayout() {
+    fileprivate func setupLayout() {
         layer.shadowRadius = initialShadowRadius
         layer.shadowOpacity = 0.6
-        layer.shadowColor = UIColor.blackColor().CGColor
+        layer.shadowColor = UIColor.black.cgColor
         cornerRadius = iconStyle ? 5.0 : 0.0
-        backgroundColor = .clearColor()
+        backgroundColor = .clear
     }
     
-    private func setupContentView() {
+    fileprivate func setupContentView() {
         contentView.frame = bounds
         contentView.layer.masksToBounds = true
-        contentView.backgroundColor = .whiteColor()
+        contentView.backgroundColor = .white
         subviews.forEach { subview in
             subview.translatesAutoresizingMaskIntoConstraints = true
             subview.removeFromSuperview()
@@ -137,7 +137,7 @@ public class MPParallaxView: UIView {
         addSubview(contentView)
     }
     
-    private func resizeSubviewsForParallax() {
+    fileprivate func resizeSubviewsForParallax() {
         let offset: CGFloat = initialParallaxOffset
         contentView.subviews.forEach { subview in
             subview.frame.origin = CGPoint(x: -offset, y: -offset)
@@ -145,53 +145,54 @@ public class MPParallaxView: UIView {
         }
     }
     
-    private func addShadowPath() {
+    fileprivate func addShadowPath() {
         let path = UIBezierPath()
-        path.moveToPoint(CGPoint(x: 4, y: CGRectGetHeight(bounds)))
-        path.addLineToPoint(CGPoint(x: CGRectGetWidth(bounds) - 4, y: CGRectGetHeight(bounds)))
-        path.addLineToPoint(CGPoint(x: CGRectGetWidth(bounds) - 4, y: 20))
-        path.addLineToPoint(CGPoint(x: 4, y: 20))
-        path.closePath()
-        layer.shadowPath = path.CGPath
+        let xOffset: CGFloat = 4.0
+        let yOffset: CGFloat = 20.0
+        path.move(to: CGPoint(x: xOffset, y: bounds.height))
+        path.addLine(to: CGPoint(x: bounds.width - xOffset, y: bounds.height))
+        path.addLine(to: CGPoint(x: bounds.width - xOffset, y: yOffset))
+        path.addLine(to: CGPoint(x: xOffset, y: yOffset))
+        path.close()
+        layer.shadowPath = path.cgPath
     }
     
     //MARK: Animations
     
-    private func makeZoomInEffect() {
+    fileprivate func makeZoomInEffect() {
         contentView.subviews.forEach { subview in
             subview.center = CGPoint(x: subview.center.x - widthZoom(subview), y: subview.center.y - heightZoom(subview))
-            subview.frame.size = CGSize(width: subview.frame.size.width + widthZoom(subview) * 2, height: subview.frame.size.height + heightZoom(subview) * 2)
+            subview.frame.size = CGSize(width: subview.frame.size.width + widthZoom(subview) * 2.0, height: subview.frame.size.height + heightZoom(subview) * 2.0)
         }
     }
     
-    private func makeZoomOutEffect() {
-        UIView.animateWithDuration(0.3) {
+    fileprivate func makeZoomOutEffect() {
+        UIView.animate(withDuration: 0.3, animations: {
             self.contentView.subviews.forEach { subview in
                 subview.center = CGPoint(x: subview.center.x + self.widthZoom(subview), y: subview.center.y + self.heightZoom(subview))
-                subview.frame.size = CGSize(width: subview.frame.size.width - self.widthZoom(subview) * 2, height: subview.frame.size.height - self.heightZoom(subview) * 2)
+                subview.frame.size = CGSize(width: subview.frame.size.width - self.widthZoom(subview) * 2.0, height: subview.frame.size.height - self.heightZoom(subview) * 2.0)
             }
-        }
+        }) 
     }
     
-    private func animateForGivenState(state: ViewState) {
+    fileprivate func animateForGivenState(_ state: ViewState) {
         switch state {
-        case .Pick:
+        case .pick:
             animatePick()
             makeZoomInEffect()
-        case .PutDown:
+        case .putDown:
             animateReturn()
             makeZoomOutEffect()
-        case .Initial:
+        case .initial:
             break
         }
     }
 
-    private func addShadowGroupAnimation(shadowOffset shadowOffset: CGSize, shadowRadius: CGFloat, duration: NSTimeInterval, layer: CALayer) {
-        if let presentationLayer = layer.presentationLayer() as? CALayer {
-
+    fileprivate func addShadowGroupAnimation(shadowOffset: CGSize, shadowRadius: CGFloat, duration: TimeInterval, layer: CALayer) {
+        if let presentationLayer = layer.presentation() {
             let offsetAnimation = CABasicAnimation(keyPath: "shadowOffset")
-            offsetAnimation.fromValue = NSValue(CGSize: presentationLayer.shadowOffset)
-            offsetAnimation.toValue = NSValue(CGSize: shadowOffset)
+            offsetAnimation.fromValue = NSValue(cgSize: presentationLayer.shadowOffset)
+            offsetAnimation.toValue = NSValue(cgSize: shadowOffset)
 
             let radiusAnimation = CABasicAnimation(keyPath: "shadowRadius")
             radiusAnimation.fromValue = presentationLayer.shadowRadius as NSNumber
@@ -202,46 +203,47 @@ public class MPParallaxView: UIView {
             animationGroup.duration = duration
             animationGroup.animations = [offsetAnimation, radiusAnimation]
 
-            layer.addAnimation(animationGroup, forKey: "shadowAnim")
+            layer.add(animationGroup, forKey: "shadowAnim")
         }
+
         layer.shadowRadius = shadowRadius
         layer.shadowOffset = shadowOffset
     }
     
-    private func pickAnimation() {
+    fileprivate func pickAnimation() {
         let shadowOffset = CGSize(width: 0.0, height: 30.0);
         addShadowGroupAnimation(shadowOffset: shadowOffset, shadowRadius: finalShadowRadius, duration: 0.02, layer: layer)
     }
     
-    private func putDownAnimation() {
-        let shadowOffset = CGSizeZero
+    fileprivate func putDownAnimation() {
+        let shadowOffset = CGSize.zero
         addShadowGroupAnimation(shadowOffset: shadowOffset, shadowRadius: initialShadowRadius, duration: 0.4, layer: layer)
     }
 
-    private func animatePick() {
+    fileprivate func animatePick() {
         pickAnimation()
     }
 
-    private func animateReturn() {
+    fileprivate func animateReturn() {
         putDownAnimation()
     }
 
-    private func parallaxOffset(forView view: UIView) -> CGFloat {
+    fileprivate func parallaxOffset(forView view: UIView) -> CGFloat {
         switch parallaxType {
-        case .BasedOnHierarchyInParallaxView(let parallaxOffsetMultiplier):
-            if let indexInSuperview = view.superview?.subviews.indexOf(view) {
+        case .basedOnHierarchyInParallaxView(let parallaxOffsetMultiplier):
+            if let indexInSuperview = view.superview?.subviews.index(of: view) {
                 return CGFloat(indexInSuperview) * (parallaxOffsetMultiplier ?? multiplerOfIndexInHierarchyToParallaxOffset)
             } else {
                 return 5.0
             }
-        case .Custom(let parallaxOffset):
+        case .custom(let parallaxOffset):
             return parallaxOffset
-        case .BasedOnTag:
+        case .basedOnTag:
             return CGFloat(view.tag) * 2.0
         }
     }
     
-    private func applyParallaxEffectOnSubviews(xOffset xOffset: CGFloat, yOffset: CGFloat) {
+    fileprivate func applyParallaxEffectOnSubviews(xOffset: CGFloat, yOffset: CGFloat) {
         var parallaxOffsetToSet: CGFloat
         for subview in contentView.subviews {
             parallaxOffsetToSet = parallaxOffset(forView: subview)
@@ -251,7 +253,7 @@ public class MPParallaxView: UIView {
         }
     }
     
-    private func applyParallaxEffectOnView(basedOnTouch touch: UITouch?) {
+    fileprivate func applyParallaxEffectOnView(basedOnTouch touch: UITouch?) {
         var parallaxOffset = parallaxOffsetDuringPick
         var offsetX: CGFloat = 0.0, offsetY: CGFloat = 0.0
         if let accelerometerMovement = accelerometerMovement {
@@ -260,9 +262,9 @@ public class MPParallaxView: UIView {
             parallaxOffset *= 2.0
         }
         
-        if let touch = touch, let superview = superview where offsetX == 0.0 && offsetY == 0.0 {
-            offsetX = (0.5 - touch.locationInView(superview).x / superview.bounds.width) * -1
-            offsetY = (0.5 - touch.locationInView(superview).y / superview.bounds.height) * -1
+        if let touch = touch, let superview = superview, offsetX == 0.0 && offsetY == 0.0 {
+            offsetX = (0.5 - touch.location(in: superview).x / superview.bounds.width) * -1
+            offsetY = (0.5 - touch.location(in: superview).y / superview.bounds.height) * -1
         }
         
         var t = CATransform3DMakeScale(1.1, 1.1, 1.1)
@@ -274,34 +276,34 @@ public class MPParallaxView: UIView {
         applyParallaxEffectOnSubviews(xOffset: offsetX, yOffset: offsetY)
     }
     
-    private func removeParallaxEffectFromView() {
-        UIView.animateWithDuration(0.5) {
+    fileprivate func removeParallaxEffectFromView() {
+        UIView.animate(withDuration: 0.5, animations: {
             self.glowEffect.alpha = 0.0
             self.layer.transform = CATransform3DIdentity
             self.contentView.subviews.forEach { subview in
                 subview.layer.transform = CATransform3DIdentity
             }
-        }
+        }) 
     }
     
     //MARK: Glow effect
-    private func applyGlowAlpha(glowAlpha: CGFloat) {
+    fileprivate func applyGlowAlpha(_ glowAlpha: CGFloat) {
         if glowAlpha < 1.0 && glowAlpha > 0.0 {
             glowEffect.alpha = glowAlpha
         }
     }
     
-    private func applyGlowEffectOnView(basedOnTouch touch: UITouch?) {
+    fileprivate func applyGlowEffectOnView(basedOnTouch touch: UITouch?) {
         let changeAlphaValue: CGFloat = 0.05
-        if let touch = touch where touch.locationInView(self).y > bounds.height / 2 {
-            glowEffect.center = touch.locationInView(self)
+        if let touch = touch, touch.location(in: self).y > bounds.height / 2 {
+            glowEffect.center = touch.location(in: self)
             applyGlowAlpha(glowEffect.alpha + changeAlphaValue)
         } else {
             applyGlowAlpha(glowEffect.alpha - changeAlphaValue)
         }
     }
     
-    private func applyGlowEffectOnView(basedOnAccelerometerMovement movement: AccelerometerMovement?) {
+    fileprivate func applyGlowEffectOnView(basedOnAccelerometerMovement movement: AccelerometerMovement?) {
         guard let movement = movement, let superview = superview else { return }
         let bigMultiplerForAccelerometerToGlowOffset: Double = Double(superview.bounds.size.width * 2.0)
         glowEffect.center = CGPoint(x: center.x + CGFloat(movement.x * bigMultiplerForAccelerometerToGlowOffset),
@@ -317,27 +319,27 @@ public class MPParallaxView: UIView {
     
     //MARK: On touch actions
     
-    public override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        state = .Pick
+    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        state = .pick
         applyParallaxEffectOnView(basedOnTouch: Array(touches).first)
         applyGlowEffectOnView(basedOnTouch: Array(touches).first)
-        super.touchesMoved(touches, withEvent: event)
+        super.touchesMoved(touches, with: event)
     }
     
-    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        state = .PutDown
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        state = .putDown
         removeParallaxEffectFromView()
-        super.touchesEnded(touches, withEvent: event)
+        super.touchesEnded(touches, with: event)
     }
 }
 
 extension MPParallaxView {
     
-    func heightZoom(viewToCalculate: UIView) -> CGFloat {
+    func heightZoom(_ viewToCalculate: UIView) -> CGFloat {
         return viewToCalculate.bounds.size.height * zoomMultipler
     }
     
-    func widthZoom(viewToCalculate: UIView) -> CGFloat {
+    func widthZoom(_ viewToCalculate: UIView) -> CGFloat {
         return viewToCalculate.bounds.size.width * zoomMultipler
     }
 }
