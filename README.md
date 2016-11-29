@@ -23,7 +23,7 @@ There are 3 different ways to set up parallax:
 
 ## Requirements
 
-Swift 2.0, iOS 9
+Xcode 8, iOS 9
 
 ## Installation
 
