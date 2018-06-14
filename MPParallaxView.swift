@@ -101,11 +101,12 @@ open class MPParallaxView: UIView {
     fileprivate func prepareForMotionDetection() {
         if let currentQueue = OperationQueue.current, accelerometerEnabled {
             motionManager.accelerometerUpdateInterval = 0.1
-            motionManager.startAccelerometerUpdates(to: currentQueue) { data, error in
-                self.accelerometerMovement = AccelerometerMovement(x: data?.acceleration.x ?? 0.0, y: data?.acceleration.y ?? 0.0)
+            motionManager.startAccelerometerUpdates(to: currentQueue) {[weak self] data, error in
+               guard let strongSelf = self else { return }
+                strongSelf.accelerometerMovement = AccelerometerMovement(x: data?.acceleration.x ?? 0.0, y: data?.acceleration.y ?? 0.0)
                 UIView.animate(withDuration: 0.1, animations: {
-                    self.applyParallaxEffectOnView(basedOnTouch: nil)
-                    self.applyGlowEffectOnView(basedOnAccelerometerMovement: self.accelerometerMovement)
+                    strongSelf.applyParallaxEffectOnView(basedOnTouch: nil)
+                    strongSelf.applyGlowEffectOnView(basedOnAccelerometerMovement: strongSelf.accelerometerMovement)
                 }) 
             }
         }
